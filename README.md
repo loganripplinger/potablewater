@@ -1,5 +1,5 @@
-# reddit data miner
-Simple bot that scrapes and records unqiue submissions that are jpgs from top 100 posts from reddit.com/r/all every 10 minutes.
+# Reddit Front Page Data Miner
+Simple bot that scrapes and records unqiue submissions that are jpg's or png's from the top 100 posts of reddit.com/r/all every 10 minutes.
 
 Uses reddit's API (via PRAW) and stores that information to a sqlite3 database.
 
@@ -15,7 +15,7 @@ Setup your clients secrets in the secrets_rename.py file. Then rename it to secr
 
 # Export the submissions data to csv
 
-Via the command line, "cd" to the location of the database (the project directory). Then, use the following command:
+Via the command line, `cd` to the location of the database (the project directory). Then, use the following command:
 ```bash
 sqlite3 -header -csv memer.db "select * from posts;" > out.csv
 ```
