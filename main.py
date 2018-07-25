@@ -1,4 +1,4 @@
-suimport praw
+import praw
 import sqlite3
 from datetime import datetime 
 import time
@@ -18,6 +18,7 @@ def print_exception():
 ###############################################################################
 
 def is_an_image(url):
+	# rewrite with url.endswith()
 	if url[-3:] in ['jpg', 'png'] or url[-4:] in ['jpeg']:
 		return True
 	return False
@@ -48,23 +49,19 @@ def is_id_in_db(sub):
 def add_sub_to_db(sub):
 	cursor.execute(
 		'INSERT INTO posts (id, title, url, subreddit, subreddit_id, created_utc, discovered) VALUES (?, ?, ?, ?, ?, ?, ?)',
-		(
-			sub.id,
+			(sub.id,
 			sub.title,
 			sub.url,
 		   	str(sub.subreddit),
 		    sub.subreddit_id,
 		    int(sub.created_utc),
-			int(time.time())
-		)
-	)
+			int(time.time())))
 	conn.commit()
 
 def update_lastseen(sub):
 	cursor.execute(
 		'UPDATE posts SET lastseen=? WHERE id=?',
-		(int(time.time()), sub.id)
-	)
+		(int(time.time()), sub.id))
 	conn.commit()
 
 ###############################################################################
@@ -99,7 +96,6 @@ if cursor.fetchone()[0] == 0:
 	cursor.execute(create_posts_table)
 
 while True:
- 
 	try:
 		r = praw.Reddit(
 				client_id = secrets.client_id,
@@ -111,8 +107,7 @@ while True:
 
 		submissions = r.subreddit('all').hot(limit=100);
 		
-		total_sub_count = 0
-		new_sub_count = 0
+		total_sub_count, new_sub_count = 0
 
 		print('')
 
