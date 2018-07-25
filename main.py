@@ -101,7 +101,7 @@ while True:
 				client_id = secrets.client_id,
 				client_secret = secrets.client_secret,
 				password = secrets.password,
-				user_agent = 'PotableWater front page scrapper',
+				user_agent = 'PotableWater; front page scraper',
 				username = secrets.username
 				)
 
