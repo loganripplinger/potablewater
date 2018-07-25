@@ -1,4 +1,4 @@
-import praw
+suimport praw
 import sqlite3
 from datetime import datetime 
 import time
@@ -7,7 +7,7 @@ import secrets
 
 ###############################################################################
 
-#May get an error from this...
+# May get an error from this...
 def print_exception():
     exc_type, exc_obj, tb = sys.exc_info()
     f = tb.tb_frame
@@ -70,16 +70,16 @@ def update_lastseen(sub):
 ###############################################################################
 
 
-#db will be creating if it does not exist
+# db will be creating if it does not exist
 conn = sqlite3.connect("memer.db", timeout=11)
 cursor = conn.cursor()
 
-#to export the sqlite3 database/table to csv,
-#via the command line use the following command
-#sqlite3 -header -csv memer.db "select * from posts;" > out.csv
+# to export the sqlite3 database/table to csv,
+# via the command line use the following command
+# sqlite3 -header -csv memer.db "select * from posts;" > out.csv
 
-#Creates the posts table if we don't have it
-#NOTE: Does not check for changes to table schema
+# Creates the posts table if we don't have it
+# NOTE: Does not check for changes to table schema
 cursor.execute('SELECT count(*) FROM sqlite_master WHERE type=? AND name=?;',('table', 'posts'))
 
 if cursor.fetchone()[0] == 0:
